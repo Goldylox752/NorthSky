@@ -1,63 +1,40 @@
-// /pages/api/checkout.js
+<script type="module">
 
-import Stripe from "stripe";
+async function startCheckout(plan, btn) {
 
-const stripe = new Stripe(
-process.env.STRIPE_SECRET_KEY
-);
+  try {
 
-export default async function handler(req, res) {
+    btn.disabled = true;
+    const originalText = btn.innerText;
+    btn.innerText = "Redirecting...";
 
-if (req.method !== "POST") {
-return res.status(405).json({
-error: "Method not allowed"
-});
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ plan })
+    });
+
+    const data = await res.json();
+
+    if (!data.url) {
+      throw new Error("Missing checkout URL");
+    }
+
+    window.location.href = data.url;
+
+  } catch (err) {
+
+    console.error(err);
+
+    alert("Checkout failed. Try again.");
+
+    btn.disabled = false;
+    btn.innerText = "Start Getting Leads";
+  }
 }
 
-try {
+window.startCheckout = startCheckout;
 
-const { plan } = req.body;
-
-const priceMap = {
-starter: process.env.STRIPE_STARTER_PRICE_ID,
-growth: process.env.STRIPE_GROWTH_PRICE_ID,
-elite: process.env.STRIPE_ELITE_PRICE_ID
-};
-
-const session = await stripe.checkout.sessions.create({
-
-mode: "subscription",
-
-payment_method_types: ["card"],
-
-line_items: [
-{
-price: priceMap[plan],
-quantity: 1
-}
-],
-
-success_url:
-`${req.headers.origin}/success`,
-
-cancel_url:
-`${req.headers.origin}/pricing`
-
-});
-
-return res.status(200).json({
-success: true,
-url: session.url
-});
-
-} catch (err) {
-
-console.error(err);
-
-return res.status(500).json({
-error: "Stripe session failed"
-});
-
-}
-
-}
+</script>
