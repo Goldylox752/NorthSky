@@ -1,225 +1,318 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- ================= HERO ================= -->
 
-<title>NorthSky Lead OS | Exclusive Contractor Lead Network</title>
+<section id="home"
+class="page active min-h-screen flex items-center justify-center px-6 pt-24 pb-20">
 
-<script src="https://cdn.tailwindcss.com"></script>
+<div class="max-w-7xl w-full grid lg:grid-cols-2 gap-16 items-center">
 
-<style>
-body {
-  background: radial-gradient(circle at top, #0f172a, #020617);
-  color: white;
-  font-family: system-ui;
-}
+<!-- LEFT -->
 
-.glass {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
-}
+<div>
 
-.btn {
-  transition: 0.2s ease;
-}
+<p class="text-cyan-400 font-bold tracking-[0.2em] uppercase mb-5">
+Exclusive Roofing Lead Network
+</p>
 
-.btn:hover {
-  transform: scale(0.98);
-}
+<h1 class="text-5xl md:text-7xl font-black leading-[1.05] mb-6">
 
-.hidden {
-  display: none;
-}
-</style>
-</head>
+Stop Chasing Leads.<br/>
 
-<body>
+<span class="text-cyan-400">
+Get Homeowners Ready To Buy.
+</span>
 
-<!-- ================= LANDING ================= -->
-<section id="home" class="min-h-screen flex items-center justify-center text-center px-6">
+</h1>
 
-  <div class="max-w-3xl">
+<p class="text-xl text-gray-300 leading-8 mb-10 max-w-2xl">
 
-    <p class="text-cyan-400 font-semibold mb-3">
-      NorthSky Lead OS
-    </p>
+NorthSky delivers verified roofing and exterior leads directly to contractors in real time.
 
-    <h1 class="text-5xl font-bold mb-6 leading-tight">
-      Exclusive Contractor Leads<br/>On Demand
-    </h1>
+No recycled data.
+No bidding wars.
+No waiting days for callbacks.
 
-    <p class="text-gray-300 mb-8 text-lg">
-      Verified homeowners actively requesting roofing, exterior, and repair services — delivered in real time.
-    </p>
+</p>
 
-    <div class="glass p-6 rounded-2xl text-left mb-8">
-      <p class="text-sm text-gray-300 leading-7">
-        ✔ Exclusive lead routing per contractor<br/>
-        ✔ High-intent homeowner requests<br/>
-        ✔ Instant access dashboard<br/>
-        ✔ Pay-per-lead or subscription access
-      </p>
-    </div>
+<!-- TRUST -->
 
-    <button onclick="goPricing()"
-      class="btn bg-cyan-500 text-black font-bold px-8 py-4 rounded-xl">
-      View Pricing
-    </button>
+<div class="flex flex-wrap gap-4 mb-10">
 
-  </div>
+<div class="glass px-5 py-3 rounded-2xl">
+<p class="text-sm font-semibold">
+⚡ Real-Time Lead Delivery
+</p>
+</div>
+
+<div class="glass px-5 py-3 rounded-2xl">
+<p class="text-sm font-semibold">
+🛡 Exclusive Territories
+</p>
+</div>
+
+<div class="glass px-5 py-3 rounded-2xl">
+<p class="text-sm font-semibold">
+📈 Scale Your Crew Faster
+</p>
+</div>
+
+</div>
+
+<!-- CTA -->
+
+<div class="flex flex-col sm:flex-row gap-5">
+
+<button
+onclick="startCheckout('growth')"
+class="btn bg-cyan-500 hover:bg-cyan-400 text-black font-black px-10 py-5 rounded-2xl text-lg shadow-2xl shadow-cyan-500/20">
+
+Start Getting Leads
+
+</button>
+
+<button
+onclick="showPage('dashboard')"
+class="btn glass px-10 py-5 rounded-2xl font-bold text-lg">
+
+Preview Live Feed
+
+</button>
+
+</div>
+
+<!-- SOCIAL PROOF -->
+
+<div class="mt-12 flex flex-wrap gap-8 items-center text-sm text-gray-400">
+
+<div>
+<span class="text-white font-bold text-2xl">
+2,400+
+</span><br/>
+Leads Routed
+</div>
+
+<div>
+<span class="text-white font-bold text-2xl">
+$3.1M+
+</span><br/>
+Contract Revenue Generated
+</div>
+
+<div>
+<span class="text-white font-bold text-2xl">
+17
+</span><br/>
+Markets Active
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT SIDE -->
+
+<div class="relative">
+
+<div class="glass rounded-3xl p-7 shadow-2xl">
+
+<div class="flex items-center justify-between mb-8">
+
+<div>
+<h3 class="font-black text-2xl">
+Live Contractor Feed
+</h3>
+
+<p class="text-gray-400 text-sm mt-1">
+Verified homeowner opportunities
+</p>
+</div>
+
+<div class="bg-green-500/20 text-green-400 px-4 py-2 rounded-xl text-sm font-bold">
+LIVE
+</div>
+
+</div>
+
+<div class="space-y-5">
+
+<!-- CARD -->
+
+<div class="bg-black/30 rounded-2xl p-5 border border-white/5">
+
+<div class="flex items-center justify-between mb-4">
+
+<h4 class="font-bold text-lg">
+Full Roof Replacement
+</h4>
+
+<span class="text-green-400 text-sm font-semibold">
+High Intent
+</span>
+
+</div>
+
+<p class="text-gray-400 mb-5">
+Denver, CO • Insurance approved • 2-story property
+</p>
+
+<div class="flex items-center justify-between">
+
+<div>
+<p class="text-xs text-gray-500">
+Estimated Job Value
+</p>
+
+<p class="font-black text-xl">
+$18,400
+</p>
+</div>
+
+<button
+class="bg-green-500 text-black px-5 py-3 rounded-xl font-bold">
+Unlock — $79
+</button>
+
+</div>
+
+</div>
+
+<!-- CARD -->
+
+<div class="bg-black/30 rounded-2xl p-5 border border-white/5">
+
+<div class="flex items-center justify-between mb-4">
+
+<h4 class="font-bold text-lg">
+Storm Damage Repair
+</h4>
+
+<span class="text-yellow-400 text-sm font-semibold">
+Urgent
+</span>
+
+</div>
+
+<p class="text-gray-400 mb-5">
+Austin, TX • Active leak • Same-day request
+</p>
+
+<div class="flex items-center justify-between">
+
+<div>
+<p class="text-xs text-gray-500">
+Estimated Job Value
+</p>
+
+<p class="font-black text-xl">
+$7,900
+</p>
+</div>
+
+<button
+class="bg-green-500 text-black px-5 py-3 rounded-xl font-bold">
+Unlock — $49
+</button>
+
+</div>
+
+</div>
+
+<!-- CARD -->
+
+<div class="bg-black/30 rounded-2xl p-5 border border-white/5">
+
+<div class="flex items-center justify-between mb-4">
+
+<h4 class="font-bold text-lg">
+Roof Inspection
+</h4>
+
+<span class="text-cyan-400 text-sm font-semibold">
+New
+</span>
+
+</div>
+
+<p class="text-gray-400 mb-5">
+Phoenix, AZ • Residential inspection request
+</p>
+
+<div class="flex items-center justify-between">
+
+<div>
+<p class="text-xs text-gray-500">
+Estimated Job Value
+</p>
+
+<p class="font-black text-xl">
+$4,300
+</p>
+</div>
+
+<button
+class="bg-green-500 text-black px-5 py-3 rounded-xl font-bold">
+Unlock — $29
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
-<!-- ================= PRICING ================= -->
-<section id="pricing" class="hidden min-h-screen flex items-center justify-center px-6 py-16">
+<!-- ================= STRIPE ================= -->
 
-  <div class="max-w-6xl w-full text-center">
+<script type="module">
 
-    <h2 class="text-4xl font-bold mb-4">Access Plans</h2>
+async function startCheckout(plan) {
 
-    <p class="text-gray-400 mb-12">
-      Scale from solo contractor to full operation
-    </p>
+try {
 
-    <div class="grid md:grid-cols-3 gap-6">
+const button =
+event.target;
 
-      <div class="glass p-8 rounded-2xl">
-        <h3 class="font-bold">Starter</h3>
-        <p class="text-3xl font-bold my-3">$49/mo</p>
-        <p class="text-gray-400 text-sm mb-6">Basic lead access</p>
-        <button onclick="openGate()" class="btn bg-white text-black w-full py-3 rounded-xl font-bold">
-          Select
-        </button>
-      </div>
+button.disabled = true;
 
-      <div class="glass p-8 rounded-2xl border border-cyan-500">
-        <p class="text-cyan-400 text-sm font-bold mb-2">POPULAR</p>
-        <h3 class="font-bold">Growth</h3>
-        <p class="text-3xl font-bold my-3">$99/mo</p>
-        <p class="text-gray-400 text-sm mb-6">Priority leads + CRM</p>
-        <button onclick="openGate()" class="btn bg-cyan-500 text-black w-full py-3 rounded-xl font-bold">
-          Select
-        </button>
-      </div>
+button.innerText = "Redirecting...";
 
-      <div class="glass p-8 rounded-2xl">
-        <h3 class="font-bold">Elite</h3>
-        <p class="text-3xl font-bold my-3">$249/mo</p>
-        <p class="text-gray-400 text-sm mb-6">Unlimited scaling</p>
-        <button onclick="openGate()" class="btn bg-white text-black w-full py-3 rounded-xl font-bold">
-          Select
-        </button>
-      </div>
+const response = await fetch(
+"/api/checkout",
+{
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+plan
+})
+}
+);
 
-    </div>
+const data = await response.json();
 
-    <button onclick="backHome()" class="mt-10 text-gray-400 underline">
-      ← Back
-    </button>
-
-  </div>
-
-</section>
-
-<!-- ================= GATE ================= -->
-<section id="gate" class="hidden min-h-screen flex items-center justify-center px-6">
-
-  <div class="glass p-8 rounded-2xl max-w-md w-full text-center">
-
-    <h2 class="text-2xl font-bold mb-2">Access Portal</h2>
-
-    <p class="text-gray-400 text-sm mb-6">
-      Enter license key or Stripe-issued access token
-    </p>
-
-    <input id="key"
-      class="w-full p-4 rounded-xl bg-black border border-gray-700 text-center mb-4"
-      placeholder="XXXX-XXXX-XXXX" />
-
-    <button onclick="unlock()"
-      class="btn bg-cyan-500 text-black font-bold w-full py-4 rounded-xl">
-      Unlock Dashboard
-    </button>
-
-    <p id="error" class="text-red-400 text-sm mt-4"></p>
-
-  </div>
-
-</section>
-
-<!-- ================= DASHBOARD ================= -->
-<section id="dashboard" class="hidden min-h-screen px-6 py-12">
-
-  <div class="max-w-6xl mx-auto">
-
-    <h1 class="text-4xl font-bold mb-2">Live Lead Feed</h1>
-    <p class="text-gray-400 mb-8">Exclusive verified homeowner opportunities</p>
-
-    <div class="grid md:grid-cols-3 gap-5">
-
-      <div class="glass p-5 rounded-2xl">
-        <h3 class="font-bold">Roof Repair Lead</h3>
-        <p class="text-gray-400 text-sm mb-4">Austin • High urgency</p>
-        <button class="bg-green-500 text-black w-full py-3 rounded-xl font-bold">
-          Buy — $49
-        </button>
-      </div>
-
-      <div class="glass p-5 rounded-2xl">
-        <h3 class="font-bold">Full Replacement</h3>
-        <p class="text-gray-400 text-sm mb-4">Denver • Insurance claim</p>
-        <button class="bg-green-500 text-black w-full py-3 rounded-xl font-bold">
-          Buy — $79
-        </button>
-      </div>
-
-      <div class="glass p-5 rounded-2xl">
-        <h3 class="font-bold">Inspection Lead</h3>
-        <p class="text-gray-400 text-sm mb-4">Phoenix • Same day</p>
-        <button class="bg-green-500 text-black w-full py-3 rounded-xl font-bold">
-          Buy — $29
-        </button>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ================= JS ================= -->
-<script>
-
-function goPricing() {
-  document.getElementById("home").classList.add("hidden");
-  document.getElementById("pricing").classList.remove("hidden");
+if (!data.url) {
+throw new Error("No checkout URL");
 }
 
-function backHome() {
-  document.getElementById("pricing").classList.add("hidden");
-  document.getElementById("home").classList.remove("hidden");
+window.location.href = data.url;
+
+} catch (err) {
+
+console.error(err);
+
+alert("Unable to start checkout.");
+
 }
 
-function openGate() {
-  document.getElementById("pricing").classList.add("hidden");
-  document.getElementById("gate").classList.remove("hidden");
 }
 
-function unlock() {
-  const key = document.getElementById("key").value.trim();
-
-  if (key === "NSKY-LEADS-2026") {
-    document.getElementById("gate").classList.add("hidden");
-    document.getElementById("dashboard").classList.remove("hidden");
-  } else {
-    document.getElementById("error").innerText =
-      "Invalid access key. Please check your subscription or Stripe receipt.";
-  }
-}
+window.startCheckout = startCheckout;
 
 </script>
-
-</body>
-</html>
