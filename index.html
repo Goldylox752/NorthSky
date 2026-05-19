@@ -7,44 +7,56 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
 * { font-family: Inter, system-ui, sans-serif; }
 
 body {
-  background: radial-gradient(circle at 10% 20%, #0b1220, #020617);
+  background:
+    radial-gradient(circle at 10% 10%, #0b1220, #020617 60%),
+    radial-gradient(circle at 90% 80%, #0a1a2f, transparent 50%);
   color: #e5e7eb;
 }
 
-/* subtle grid */
+/* GRID DEPTH */
 .bg-grid {
-  background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 60px 60px;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 70px 70px;
 }
 
-/* glass */
+/* GLASS */
 .glass {
-  background: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(14px);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(18px);
   border: 1px solid rgba(148,163,184,0.12);
 }
 
 .card {
-  background: rgba(2,6,23,0.7);
-  border: 1px solid rgba(148,163,184,0.12);
-  backdrop-filter: blur(10px);
+  background: rgba(2, 6, 23, 0.75);
+  border: 1px solid rgba(148,163,184,0.10);
+  backdrop-filter: blur(14px);
 }
 
-.btn-primary {
-  background: linear-gradient(90deg, #06b6d4, #3b82f6);
-  transition: 0.2s;
-}
-.btn-primary:hover { transform: translateY(-2px); }
-
+/* SOFT GLOW */
 .glow {
-  box-shadow: 0 0 40px rgba(56,189,248,0.15);
+  box-shadow: 0 0 80px rgba(56,189,248,0.08);
+}
+
+/* BUTTON */
+.btn {
+  background: linear-gradient(90deg, #06b6d4, #3b82f6);
+  transition: all 0.2s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(59,130,246,0.2);
+}
+
+/* SECTION SPACING */
+.section {
+  padding: 120px 24px;
 }
 </style>
 </head>
@@ -58,117 +70,111 @@ body {
       NORTH<span class="text-cyan-400">SKY</span>
     </div>
 
-    <div class="hidden md:flex gap-6 text-sm text-gray-300">
+    <div class="hidden md:flex gap-8 text-sm text-gray-400">
       <a href="#platform" class="hover:text-white">Platform</a>
       <a href="#security" class="hover:text-white">Security</a>
       <a href="#pricing" class="hover:text-white">Pricing</a>
     </div>
 
-    <button class="btn-primary px-4 py-2 rounded-lg text-black font-bold">
+    <button class="btn px-4 py-2 rounded-lg text-black font-bold">
       Request Demo
     </button>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="pt-40 pb-24 px-6">
+<section class="section pt-40">
   <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
     <div>
-      <div class="text-cyan-400 text-sm font-bold tracking-widest mb-4">
+      <div class="text-cyan-400 text-xs tracking-[0.3em] font-bold mb-4">
         ENTERPRISE ROOFING INTELLIGENCE
       </div>
 
       <h1 class="text-5xl font-black leading-tight">
         Predictable revenue from
-        <span class="text-cyan-400">high-intent roofing demand</span>
+        <span class="text-cyan-400">verified homeowner demand</span>
       </h1>
 
       <p class="text-gray-400 mt-6 text-lg leading-relaxed">
-        NorthSky replaces lead marketplaces with a verified demand pipeline.
-        AI-qualified homeowner requests delivered in real-time with territory exclusivity.
+        NorthSky replaces fragmented lead marketplaces with a structured demand pipeline.
+        Every request is verified, scored, and delivered in real-time with territory control.
       </p>
 
       <div class="flex gap-4 mt-8">
-        <button class="btn-primary px-6 py-4 rounded-xl text-black font-bold">
-          Start Enterprise Trial
+        <button class="btn px-6 py-4 rounded-xl text-black font-bold">
+          Start Trial
         </button>
         <button class="glass px-6 py-4 rounded-xl font-semibold">
-          View Platform
+          View System
         </button>
       </div>
 
-      <div class="mt-10 flex gap-8 text-sm text-gray-400">
-        <div><span class="text-white font-bold text-xl">99.2%</span><br/>Lead Accuracy</div>
-        <div><span class="text-white font-bold text-xl">15 min</span><br/>Verification SLA</div>
+      <div class="mt-10 flex gap-10 text-sm text-gray-400">
+        <div><span class="text-white font-bold text-xl">99%</span><br/>Accuracy</div>
+        <div><span class="text-white font-bold text-xl">15m</span><br/>Verification</div>
         <div><span class="text-white font-bold text-xl">24/7</span><br/>Monitoring</div>
       </div>
     </div>
 
-    <!-- LIVE PANEL -->
+    <!-- LIVE FEED -->
     <div class="card rounded-3xl p-6 glow">
-      <div class="flex justify-between items-center mb-6">
+      <div class="flex justify-between mb-6">
         <div>
           <div class="font-bold text-lg">Live Demand Stream</div>
-          <div class="text-xs text-gray-400">Verified in real-time</div>
+          <div class="text-xs text-gray-400">Verified pipeline activity</div>
         </div>
         <div class="text-green-400 text-sm font-bold">● ACTIVE</div>
       </div>
 
-      <div class="space-y-4" id="feed"></div>
+      <div id="feed" class="space-y-3"></div>
     </div>
   </div>
 </section>
 
 <!-- PLATFORM -->
-<section id="platform" class="px-6 py-24 max-w-6xl mx-auto">
-  <h2 class="text-3xl font-black">Enterprise Platform Layer</h2>
-  <p class="text-gray-400 mt-2">Built for operators scaling $10M+ roofing businesses</p>
+<section id="platform" class="section max-w-6xl mx-auto">
+  <h2 class="text-3xl font-black">Platform Infrastructure</h2>
+  <p class="text-gray-400 mt-2">Built for scaling roofing operations beyond $10M+</p>
 
   <div class="grid md:grid-cols-3 gap-6 mt-10">
 
     <div class="card p-6 rounded-2xl">
-      <div class="text-cyan-400 font-bold">AI Qualification</div>
-      <p class="text-gray-400 mt-2 text-sm">
-        Every request is filtered, scored, and enriched before delivery.
-      </p>
+      <div class="text-cyan-400 font-bold">AI Scoring</div>
+      <p class="text-gray-400 mt-2 text-sm">Every lead is enriched and ranked before delivery.</p>
     </div>
 
     <div class="card p-6 rounded-2xl">
-      <div class="text-cyan-400 font-bold">Territory Control</div>
-      <p class="text-gray-400 mt-2 text-sm">
-        Exclusive zones prevent lead dilution and competition overlap.
-      </p>
+      <div class="text-cyan-400 font-bold">Territory Lock</div>
+      <p class="text-gray-400 mt-2 text-sm">No duplication, no shared competition zones.</p>
     </div>
 
     <div class="card p-6 rounded-2xl">
       <div class="text-cyan-400 font-bold">CRM Sync</div>
-      <p class="text-gray-400 mt-2 text-sm">
-        Push leads directly into Salesforce, HubSpot, or custom pipelines.
-      </p>
+      <p class="text-gray-400 mt-2 text-sm">Push directly into HubSpot, Salesforce, pipelines.</p>
     </div>
 
   </div>
 </section>
 
 <!-- SECURITY -->
-<section id="security" class="px-6 py-24 max-w-6xl mx-auto">
+<section id="security" class="section max-w-6xl mx-auto">
   <div class="card rounded-3xl p-10">
-    <h2 class="text-2xl font-black">Enterprise Security & Compliance</h2>
+    <h2 class="text-2xl font-black">Enterprise Security Layer</h2>
 
-    <div class="grid md:grid-cols-3 gap-6 mt-8 text-sm text-gray-400">
-      <div>• Encrypted data pipeline</div>
-      <div>• SOC2-aligned infrastructure</div>
-      <div>• GDPR / PIPEDA ready</div>
-      <div>• Audit logs per lead</div>
-      <div>• Role-based access control</div>
-      <div>• Uptime SLA monitoring</div>
+    <div class="grid md:grid-cols-3 gap-4 mt-6 text-sm text-gray-400">
+      <div>Encrypted data pipeline</div>
+      <div>SOC2-aligned architecture</div>
+      <div>Role-based access</div>
+      <div>Audit logging</div>
+      <div>Uptime monitoring</div>
+      <div>PIPEDA-ready compliance</div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section id="pricing" class="px-6 py-24 max-w-6xl mx-auto">
+<section id="pricing" class="section max-w-6xl mx-auto">
   <h2 class="text-3xl font-black">Enterprise Pricing</h2>
   <p class="text-gray-400 mt-2">Positioned for operators, not gig buyers</p>
 
@@ -180,10 +186,10 @@ body {
       <p class="text-gray-400 mt-2 text-sm">Core pipeline access</p>
     </div>
 
-    <div class="card p-6 rounded-2xl border border-cyan-500">
+    <div class="card p-6 rounded-2xl border border-cyan-500 glow">
       <div class="text-cyan-400 font-bold">Scale</div>
       <div class="text-3xl font-black mt-3">$799<span class="text-sm text-gray-400">/mo</span></div>
-      <p class="text-gray-400 mt-2 text-sm">Priority demand routing</p>
+      <p class="text-gray-400 mt-2 text-sm">Priority routing system</p>
     </div>
 
     <div class="card p-6 rounded-2xl">
@@ -195,7 +201,6 @@ body {
   </div>
 </section>
 
-<!-- SCRIPT -->
 <script>
 const data = [
   {t:"Roof Replacement Opportunity", l:"Calgary, AB", v:"$21,000"},
@@ -204,13 +209,14 @@ const data = [
 ];
 
 function render(){
-  document.getElementById("feed").innerHTML = data.map(d => `
-    <div class="bg-black/40 p-4 rounded-xl border border-white/5">
-      <div class="font-bold">${d.t}</div>
-      <div class="text-xs text-gray-400">${d.l}</div>
-      <div class="text-cyan-400 text-sm mt-2">${d.v}</div>
-    </div>
-  `).join("")
+  document.getElementById("feed").innerHTML =
+    data.map(d => `
+      <div class="bg-black/40 p-4 rounded-xl border border-white/5">
+        <div class="font-bold">${d.t}</div>
+        <div class="text-xs text-gray-500">${d.l}</div>
+        <div class="text-cyan-400 text-sm mt-2">${d.v}</div>
+      </div>
+    `).join("")
 }
 render();
 </script>
