@@ -1,437 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>NorthSky | Exclusive Roofing Leads – Ready to Close</title>
-  <!-- Tailwind + Google Fonts -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 (free CDN for icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-    body {
-      background: radial-gradient(circle at 10% 30%, #0B1120, #020617);
-      color: #F1F5F9;
-    }
-    /* custom glassmorphism */
-    .glass {
-      background: rgba(15, 25, 45, 0.55);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(6, 182, 212, 0.25);
-    }
-    .glass-card {
-      background: rgba(12, 20, 35, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(34, 211, 238, 0.2);
-      transition: all 0.25s ease;
-    }
-    .glass-card:hover {
-      border-color: #06b6d4;
-      transform: translateY(-4px);
-      box-shadow: 0 20px 30px -15px rgba(6,182,212,0.3);
-    }
-    .btn-cyan {
-      background: linear-gradient(105deg, #06b6d4, #22d3ee);
-      box-shadow: 0 6px 18px -6px #06b6d4aa;
-      transition: 0.2s;
-    }
-    .btn-cyan:hover {
-      background: linear-gradient(105deg, #0891b2, #06b6d4);
-      transform: scale(0.97);
-      box-shadow: 0 2px 12px -2px #22d3ee;
-    }
-    .badge-live {
-      animation: pulse 1.8s infinite;
-      background: #10b98120;
-      border-left: 2px solid #10b981;
-    }
-    @keyframes pulse {
-      0% { opacity: 0.7; box-shadow: 0 0 0 0 #10b98180; }
-      70% { opacity: 1; box-shadow: 0 0 0 6px #10b98100; }
-      100% { opacity: 0.7; }
-    }
-    .gradient-border {
-      background: linear-gradient(135deg, rgba(6,182,212,0.4), rgba(34,211,238,0.1));
-      padding: 1px;
-      border-radius: 1.5rem;
-    }
-    .inner-card {
-      background: #0C1624;
-      border-radius: 1.5rem;
-    }
-    .modal-bg {
-      background: rgba(2, 8, 23, 0.85);
-      backdrop-filter: blur(12px);
-    }
-    input, select {
-      background: #111827;
-      border: 1px solid #1f2a44;
-      transition: all 0.2s;
-    }
-    input:focus, select:focus {
-      border-color: #22d3ee;
-      outline: none;
-      box-shadow: 0 0 0 2px #22d3ee40;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NorthSky | Enterprise Roofing Intelligence Platform</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+* { font-family: Inter, system-ui, sans-serif; }
+
+body {
+  background: radial-gradient(circle at 10% 20%, #0b1220, #020617);
+  color: #e5e7eb;
+}
+
+/* subtle grid */
+.bg-grid {
+  background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* glass */
+.glass {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(148,163,184,0.12);
+}
+
+.card {
+  background: rgba(2,6,23,0.7);
+  border: 1px solid rgba(148,163,184,0.12);
+  backdrop-filter: blur(10px);
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #06b6d4, #3b82f6);
+  transition: 0.2s;
+}
+.btn-primary:hover { transform: translateY(-2px); }
+
+.glow {
+  box-shadow: 0 0 40px rgba(56,189,248,0.15);
+}
+</style>
 </head>
-<body class="antialiased overflow-x-hidden">
 
-  <!-- Navigation -->
-  <nav class="fixed top-0 left-0 w-full z-50 py-5 px-6 md:px-12 glass border-b border-white/5">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
-      <div class="text-2xl font-black tracking-tight">NORTH<span class="text-cyan-400">SKY</span></div>
-      <div class="flex gap-5 text-sm font-medium">
-        <a href="#how-it-works" class="hover:text-cyan-400 transition">How it works</a>
-        <a href="#pricing" class="hover:text-cyan-400 transition">Pricing</a>
-        <a href="#leads" class="hover:text-cyan-400 transition">Live leads</a>
+<body class="bg-grid">
+
+<!-- NAV -->
+<nav class="fixed w-full top-0 z-50 glass px-6 py-4">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div class="text-xl font-black tracking-tight">
+      NORTH<span class="text-cyan-400">SKY</span>
+    </div>
+
+    <div class="hidden md:flex gap-6 text-sm text-gray-300">
+      <a href="#platform" class="hover:text-white">Platform</a>
+      <a href="#security" class="hover:text-white">Security</a>
+      <a href="#pricing" class="hover:text-white">Pricing</a>
+    </div>
+
+    <button class="btn-primary px-4 py-2 rounded-lg text-black font-bold">
+      Request Demo
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="pt-40 pb-24 px-6">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+
+    <div>
+      <div class="text-cyan-400 text-sm font-bold tracking-widest mb-4">
+        ENTERPRISE ROOFING INTELLIGENCE
       </div>
-      <div class="hidden md:block text-sm bg-cyan-500/10 px-4 py-2 rounded-full border border-cyan-500/30">
-        ⚡ 7 new leads in your area today
+
+      <h1 class="text-5xl font-black leading-tight">
+        Predictable revenue from
+        <span class="text-cyan-400">high-intent roofing demand</span>
+      </h1>
+
+      <p class="text-gray-400 mt-6 text-lg leading-relaxed">
+        NorthSky replaces lead marketplaces with a verified demand pipeline.
+        AI-qualified homeowner requests delivered in real-time with territory exclusivity.
+      </p>
+
+      <div class="flex gap-4 mt-8">
+        <button class="btn-primary px-6 py-4 rounded-xl text-black font-bold">
+          Start Enterprise Trial
+        </button>
+        <button class="glass px-6 py-4 rounded-xl font-semibold">
+          View Platform
+        </button>
+      </div>
+
+      <div class="mt-10 flex gap-8 text-sm text-gray-400">
+        <div><span class="text-white font-bold text-xl">99.2%</span><br/>Lead Accuracy</div>
+        <div><span class="text-white font-bold text-xl">15 min</span><br/>Verification SLA</div>
+        <div><span class="text-white font-bold text-xl">24/7</span><br/>Monitoring</div>
       </div>
     </div>
-  </nav>
 
-  <!-- Hero Section (matching original style but enhanced) -->
-  <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-32 pb-20 relative overflow-hidden">
-    <!-- animated bg effect -->
-    <div class="absolute top-40 -left-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-20 right-0 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl"></div>
-
-    <div class="max-w-7xl w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
-      <!-- LEFT CONTENT -->
-      <div>
-        <div class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-full px-4 py-1.5 border border-cyan-400/30 mb-6">
-          <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-          <span class="text-xs font-semibold tracking-wide text-cyan-300">EXCLUSIVE ROOFING LEAD NETWORK</span>
+    <!-- LIVE PANEL -->
+    <div class="card rounded-3xl p-6 glow">
+      <div class="flex justify-between items-center mb-6">
+        <div>
+          <div class="font-bold text-lg">Live Demand Stream</div>
+          <div class="text-xs text-gray-400">Verified in real-time</div>
         </div>
-        <h1 class="text-5xl md:text-7xl font-black leading-[1.1] mb-6 tracking-tight">
-          Stop Chasing Leads.<br/>
-          <span class="text-cyan-400 bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent">Get Jobs Ready To Close.</span>
-        </h1>
-        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 max-w-xl">
-          NorthSky delivers <span class="text-white font-semibold">verified homeowners</span> actively requesting roofing & exterior work — in real time. No recycled data, no bidding wars, just high-intent jobs your crew can close.
-        </p>
-
-        <!-- Trust badges -->
-        <div class="flex flex-wrap gap-3 mb-8">
-          <div class="glass px-5 py-2.5 rounded-full text-sm font-semibold"><i class="fas fa-bolt text-cyan-400 mr-2"></i> Real-Time Verified</div>
-          <div class="glass px-5 py-2.5 rounded-full text-sm font-semibold"><i class="fas fa-shield-alt text-cyan-400 mr-2"></i> Exclusive Territory</div>
-          <div class="glass px-5 py-2.5 rounded-full text-sm font-semibold"><i class="fas fa-chart-line text-cyan-400 mr-2"></i> Built for Scale</div>
-        </div>
-
-        <!-- CTA buttons -->
-        <div class="flex flex-col sm:flex-row gap-5">
-          <button onclick="openLeadModal('growth')" class="btn-cyan text-black font-extrabold px-10 py-5 rounded-2xl text-lg shadow-xl flex items-center justify-center gap-2">
-            <i class="fas fa-rocket"></i> Start Getting Leads
-          </button>
-          <button onclick="openDashboardPreview()" class="glass px-8 py-5 rounded-2xl font-bold text-lg border border-white/20 hover:border-cyan-400 transition flex items-center justify-center gap-2">
-            <i class="fas fa-eye"></i> Preview Live Feed
-          </button>
-        </div>
-
-        <!-- Social proof stats -->
-        <div class="mt-12 flex flex-wrap gap-8 items-center text-gray-300">
-          <div><span class="text-white font-black text-3xl">2,400+</span><br/>Leads Delivered</div>
-          <div><span class="text-white font-black text-3xl">$3.1M+</span><br/>Contract Value</div>
-          <div><span class="text-white font-black text-3xl">17</span><br/>Active Markets</div>
-        </div>
+        <div class="text-green-400 text-sm font-bold">● ACTIVE</div>
       </div>
 
-      <!-- RIGHT - LIVE LEAD FEED (interactive) -->
-      <div class="relative" id="leads">
-        <div class="glass rounded-3xl p-6 shadow-2xl backdrop-blur-lg border border-cyan-500/20">
-          <div class="flex justify-between items-center mb-6">
-            <div>
-              <h3 class="font-black text-2xl flex items-center gap-2"><i class="fas fa-waveform text-cyan-400"></i> Live Lead Feed</h3>
-              <p class="text-gray-400 text-sm mt-1">Verified homeowner requests — updated in real time</p>
-            </div>
-            <div class="bg-green-500/20 text-green-400 px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span> LIVE</div>
-          </div>
-          <div id="leadFeedContainer" class="space-y-4">
-            <!-- dynamic leads will be rendered here -->
-          </div>
-          <div class="mt-5 text-center text-xs text-gray-500 border-t border-white/10 pt-4">
-            <i class="fas fa-shield-alt"></i> Every lead verified within 15min | No recycled data
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How It Works Section -->
-  <section id="how-it-works" class="py-24 px-6 max-w-7xl mx-auto">
-    <div class="text-center mb-14">
-      <span class="text-cyan-400 font-bold uppercase tracking-wider text-sm">Simple workflow</span>
-      <h2 class="text-4xl md:text-5xl font-black mt-2">From notification to <span class="text-cyan-400">paid invoice</span></h2>
-      <p class="text-gray-400 max-w-2xl mx-auto mt-4">Exclusive, real-time leads that skip the bidding war — your team moves first.</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="glass-card p-7 rounded-2xl text-center">
-        <div class="w-16 h-16 bg-cyan-500/10 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl">🔔</div>
-        <h3 class="text-xl font-bold mb-2">1. Instant alert</h3>
-        <p class="text-gray-300">Get notified the moment a homeowner submits a verified request for roof repair, replacement, or inspection.</p>
-      </div>
-      <div class="glass-card p-7 rounded-2xl text-center">
-        <div class="w-16 h-16 bg-cyan-500/10 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl">💰</div>
-        <h3 class="text-xl font-bold mb-2">2. Unlock & contact</h3>
-        <p class="text-gray-300">Pay a small per-lead fee (or use credits) to access full contact details — exclusive for you.</p>
-      </div>
-      <div class="glass-card p-7 rounded-2xl text-center">
-        <div class="w-16 h-16 bg-cyan-500/10 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl">🏆</div>
-        <h3 class="text-xl font-bold mb-2">3. Close & earn</h3>
-        <p class="text-gray-300">High-intent jobs mean less follow-up, faster proposals, and industry-leading close rates.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing Cards (high conversion) -->
-  <section id="pricing" class="py-20 px-6 max-w-7xl mx-auto">
-    <div class="text-center mb-12">
-      <span class="text-cyan-400 font-bold tracking-wider">Transparent pricing</span>
-      <h2 class="text-4xl font-black mt-2">Choose your lead flow</h2>
-      <p class="text-gray-400 mt-3">No minimums. Cancel anytime. First 5 leads risk-free.</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      <!-- Starter -->
-      <div class="glass-card rounded-3xl p-7 border border-white/10 hover:border-cyan-400/50 transition-all">
-        <div class="text-cyan-400 text-lg font-bold">ROOFER STARTER</div>
-        <div class="text-4xl font-black mt-3">$49<span class="text-base font-normal text-gray-400">/lead</span></div>
-        <p class="text-gray-300 text-sm mt-2">Pay as you go, no subscription</p>
-        <ul class="mt-6 space-y-3 text-sm">
-          <li class="flex gap-2"><i class="fas fa-check-circle text-cyan-400 mt-0.5"></i> Real-time verified leads</li>
-          <li class="flex gap-2"><i class="fas fa-check-circle text-cyan-400 mt-0.5"></i> Basic territory (50 mile radius)</li>
-          <li class="flex gap-2"><i class="fas fa-check-circle text-cyan-400 mt-0.5"></i> Email & SMS alerts</li>
-        </ul>
-        <button onclick="openLeadModal('starter')" class="w-full mt-8 py-3 rounded-xl font-bold border border-cyan-500/50 hover:bg-cyan-500/10 transition">Get started</button>
-      </div>
-      <!-- Growth (popular) -->
-      <div class="glass-card rounded-3xl p-7 border border-cyan-400 shadow-xl shadow-cyan-500/10 relative">
-        <div class="absolute -top-3 left-6 bg-cyan-500 text-black text-xs font-black px-3 py-1 rounded-full">MOST POPULAR</div>
-        <div class="text-cyan-400 text-lg font-bold">GROWTH PLAN</div>
-        <div class="text-4xl font-black mt-3">$349<span class="text-base font-normal text-gray-400">/month</span></div>
-        <p class="text-gray-300 text-sm mt-2">20 lead credits + rollover</p>
-        <ul class="mt-6 space-y-3 text-sm">
-          <li class="flex gap-2"><i class="fas fa-check-circle text-cyan-400"></i> 20 premium leads included</li>
-          <li class="flex gap-2"><i class="fas fa-check-circle text-cyan-400"></i> Exclusive territory (75-mile)</li>
-          <li class="flex gap-2"><i class="fas fa-check-circle text-cyan-400"></i> Priority lead unlocking</li>
-          <li class="flex gap-2"><i class="fas fa-check-circle text-cyan-400"></i> Job value estimates</li>
-        </ul>
-        <button onclick="openLeadModal('growth')" class="w-full mt-8 btn-cyan text-black font-bold py-3 rounded-xl">Start Growth Plan →</button>
-      </div>
-      <!-- Scale -->
-      <div class="glass-card rounded-3xl p-7 border border-white/10 hover:border-cyan-400/50">
-        <div class="text-cyan-400 text-lg font-bold">SCALE ELITE</div>
-        <div class="text-4xl font-black mt-3">$749<span class="text-base font-normal text-gray-400">/month</span></div>
-        <p class="text-gray-300 text-sm mt-2">60 lead credits + unlimited territory</p>
-        <ul class="mt-6 space-y-3 text-sm">
-          <li class="flex gap-2"><i class="fas fa-check-circle text-cyan-400"></i> 60 high-intent lead credits</li>
-          <li class="flex gap-2"><i class="fas fa-check-circle text-cyan-400"></i> Multi-state / unlimited radius</li>
-          <li class="flex gap-2"><i class="fas fa-check-circle text-cyan-400"></i> Dedicated account manager</li>
-          <li class="flex gap-2"><i class="fas fa-check-circle text-cyan-400"></i> API access & CRM integration</li>
-        </ul>
-        <button onclick="openLeadModal('scale')" class="w-full mt-8 py-3 rounded-xl font-bold border border-cyan-500/50 hover:bg-cyan-500/10 transition">Talk to sales</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="py-16 px-6 max-w-7xl mx-auto">
-    <div class="text-center mb-10">
-      <h2 class="text-3xl font-black">Trusted by 240+ roofing contractors</h2>
-      <p class="text-gray-400">Real results, real revenue</p>
-    </div>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="glass-card p-6 rounded-2xl">
-        <div class="flex gap-1 text-yellow-400 text-lg mb-3">★★★★★</div>
-        <p class="text-gray-200">"NorthSky leads close at 4x our old sources. No more bidding wars, just exclusive jobs. Added $340k in 5 months."</p>
-        <div class="flex items-center gap-3 mt-4"><div class="w-10 h-10 rounded-full bg-cyan-500/30 flex items-center justify-center"><i class="fas fa-user-tie"></i></div><div><strong>Mike R.</strong><p class="text-xs text-gray-400">Summit Roofing, Denver</p></div></div>
-      </div>
-      <div class="glass-card p-6 rounded-2xl">
-        <div class="flex gap-1 text-yellow-400 text-lg mb-3">★★★★★</div>
-        <p class="text-gray-200">"The real-time feed is a game changer. Within 2 hours of unlocking a storm damage lead, we booked the inspection and won the job."</p>
-        <div class="flex items-center gap-3 mt-4"><div class="w-10 h-10 rounded-full bg-cyan-500/30 flex items-center justify-center"><i class="fas fa-hard-hat"></i></div><div><strong>Jessica L.</strong><p class="text-xs text-gray-400">LoneStar Exteriors, Austin</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer + guarantee -->
-  <footer class="border-t border-white/10 py-12 px-6 text-center text-gray-400 text-sm">
-    <div class="max-w-4xl mx-auto">
-      <div class="flex justify-center gap-8 mb-6 flex-wrap">
-        <span><i class="fas fa-check-circle text-cyan-400"></i> 30-day lead credit guarantee</span>
-        <span><i class="fas fa-lock text-cyan-400"></i> No long-term contract</span>
-        <span><i class="fas fa-headset text-cyan-400"></i> 24/7 support</span>
-      </div>
-      <p>© 2025 NorthSky Lead Network — Premium roofing leads for serious contractors. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <!-- MODAL for lead registration / Unlock demo -->
-  <div id="leadModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-bg transition-all" onclick="if(event.target===this) closeModal()">
-    <div class="glass-card rounded-3xl max-w-md w-full p-7 shadow-2xl border border-cyan-500/40 transform transition-all">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-2xl font-black"><span id="modalTitle">Unlock Lead Access</span></h3>
-        <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
-      </div>
-      <p class="text-gray-300 mb-5 text-sm" id="modalDesc">Enter your details — we’ll send you the lead details & schedule a quick onboarding call.</p>
-      <form id="leadCaptureForm" onsubmit="submitLeadForm(event)">
-        <input type="text" id="fullName" placeholder="Full name" class="w-full p-3 rounded-xl mb-3 text-white" required>
-        <input type="email" id="email" placeholder="Business email" class="w-full p-3 rounded-xl mb-3 text-white" required>
-        <input type="tel" id="phone" placeholder="Phone number" class="w-full p-3 rounded-xl mb-3 text-white" required>
-        <select id="companySize" class="w-full p-3 rounded-xl mb-5 text-white">
-          <option value="1-5 crew">1-5 crew members</option>
-          <option value="6-20 crew">6-20 crew members</option>
-          <option value="20+ crew">20+ crew members</option>
-        </select>
-        <input type="hidden" id="selectedPlan" value="growth">
-        <button type="submit" class="btn-cyan w-full py-3 rounded-xl font-black text-black">Get Instant Access →</button>
-        <p class="text-xs text-gray-500 mt-3 text-center">No spam, no hidden fees. Lead details sent instantly.</p>
-      </form>
+      <div class="space-y-4" id="feed"></div>
     </div>
   </div>
+</section>
 
-  <!-- DASHBOARD PREVIEW MODAL (live feed preview) -->
-  <div id="dashboardModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-bg" onclick="if(event.target===this) closeDashboard()">
-    <div class="glass-card rounded-3xl max-w-3xl w-full p-6 border border-cyan-500/40 max-h-[80vh] overflow-auto">
-      <div class="flex justify-between mb-4">
-        <h3 class="text-2xl font-black"><i class="fas fa-chart-line text-cyan-400"></i> Live Lead Dashboard Preview</h3>
-        <button onclick="closeDashboard()" class="text-3xl">&times;</button>
-      </div>
-      <p class="text-gray-300 mb-5">Real-time verified leads from your exclusive territory — updated as homeowners submit requests.</p>
-      <div class="space-y-4" id="dashboardLeadList">
-        <!-- dynamic feed copy will be inserted -->
-      </div>
-      <div class="mt-6 text-center">
-        <button onclick="closeDashboard(); openLeadModal('growth');" class="btn-cyan px-6 py-3 rounded-xl font-bold text-black">Activate full access →</button>
-      </div>
+<!-- PLATFORM -->
+<section id="platform" class="px-6 py-24 max-w-6xl mx-auto">
+  <h2 class="text-3xl font-black">Enterprise Platform Layer</h2>
+  <p class="text-gray-400 mt-2">Built for operators scaling $10M+ roofing businesses</p>
+
+  <div class="grid md:grid-cols-3 gap-6 mt-10">
+
+    <div class="card p-6 rounded-2xl">
+      <div class="text-cyan-400 font-bold">AI Qualification</div>
+      <p class="text-gray-400 mt-2 text-sm">
+        Every request is filtered, scored, and enriched before delivery.
+      </p>
+    </div>
+
+    <div class="card p-6 rounded-2xl">
+      <div class="text-cyan-400 font-bold">Territory Control</div>
+      <p class="text-gray-400 mt-2 text-sm">
+        Exclusive zones prevent lead dilution and competition overlap.
+      </p>
+    </div>
+
+    <div class="card p-6 rounded-2xl">
+      <div class="text-cyan-400 font-bold">CRM Sync</div>
+      <p class="text-gray-400 mt-2 text-sm">
+        Push leads directly into Salesforce, HubSpot, or custom pipelines.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section id="security" class="px-6 py-24 max-w-6xl mx-auto">
+  <div class="card rounded-3xl p-10">
+    <h2 class="text-2xl font-black">Enterprise Security & Compliance</h2>
+
+    <div class="grid md:grid-cols-3 gap-6 mt-8 text-sm text-gray-400">
+      <div>• Encrypted data pipeline</div>
+      <div>• SOC2-aligned infrastructure</div>
+      <div>• GDPR / PIPEDA ready</div>
+      <div>• Audit logs per lead</div>
+      <div>• Role-based access control</div>
+      <div>• Uptime SLA monitoring</div>
     </div>
   </div>
+</section>
 
-  <script>
-    // Lead data (demo)
-    const leadsData = [
-      { title: "Full Roof Replacement", location: "Denver, CO • Insurance approved • 2-story home", urgency: "High Intent", value: "$18,400", price: "$79", tagColor: "text-green-400", urgencyIcon: "🔥" },
-      { title: "Storm Damage Repair", location: "Austin, TX • Active leak • Same-day request", urgency: "Urgent", value: "$7,900", price: "$49", tagColor: "text-yellow-400", urgencyIcon: "⚠️" },
-      { title: "Roof Inspection + Estimate", location: "Phoenix, AZ • HOA required inspection", urgency: "New", value: "$4,300", price: "$29", tagColor: "text-cyan-400", urgencyIcon: "✨" },
-      { title: "Hail Damage Claim", location: "Oklahoma City, OK • Insurance adjuster assigned", urgency: "High Value", value: "$22,500", price: "$99", tagColor: "text-purple-400", urgencyIcon: "💎" }
-    ];
+<!-- PRICING -->
+<section id="pricing" class="px-6 py-24 max-w-6xl mx-auto">
+  <h2 class="text-3xl font-black">Enterprise Pricing</h2>
+  <p class="text-gray-400 mt-2">Positioned for operators, not gig buyers</p>
 
-    function renderLeadFeed() {
-      const container = document.getElementById('leadFeedContainer');
-      if(!container) return;
-      container.innerHTML = leadsData.map(lead => `
-        <div class="bg-black/30 rounded-2xl p-5 border border-white/5 hover:border-cyan-500/40 transition-all">
-          <div class="flex items-center justify-between mb-3">
-            <h4 class="font-bold text-lg flex items-center gap-2"><span>${lead.urgencyIcon}</span> ${lead.title}</h4>
-            <span class="${lead.tagColor} text-sm font-semibold">${lead.urgency}</span>
-          </div>
-          <p class="text-gray-400 mb-4 text-sm">${lead.location}</p>
-          <div class="flex items-center justify-between">
-            <div><p class="text-xs text-gray-500">Est. Job Value</p><p class="font-black text-xl">${lead.value}</p></div>
-            <button onclick="unlockLeadAction('${lead.title}')" class="bg-green-500 hover:bg-green-400 text-black font-bold px-5 py-2.5 rounded-xl transition flex items-center gap-1"><i class="fas fa-unlock-alt"></i> Unlock — ${lead.price}</button>
-          </div>
-        </div>
-      `).join('');
-    }
+  <div class="grid md:grid-cols-3 gap-6 mt-10">
 
-    function unlockLeadAction(leadTitle) {
-      // store lead interest
-      localStorage.setItem('interestedLead', leadTitle);
-      openLeadModal('lead_unlock');
-    }
+    <div class="card p-6 rounded-2xl">
+      <div class="text-cyan-400 font-bold">Growth</div>
+      <div class="text-3xl font-black mt-3">$299<span class="text-sm text-gray-400">/mo</span></div>
+      <p class="text-gray-400 mt-2 text-sm">Core pipeline access</p>
+    </div>
 
-    function openLeadModal(plan) {
-      const modal = document.getElementById('leadModal');
-      const titleElem = document.getElementById('modalTitle');
-      const descElem = document.getElementById('modalDesc');
-      const planInput = document.getElementById('selectedPlan');
-      planInput.value = plan;
-      if(plan === 'growth') {
-        titleElem.innerText = '🚀 Activate Growth Plan';
-        descElem.innerText = 'Get 20 lead credits + exclusive territory. Enter your info to lock in demo pricing.';
-      } else if(plan === 'starter') {
-        titleElem.innerText = '🎯 Starter Access';
-        descElem.innerText = 'Pay per lead — first lead 50% off. Provide details and we’ll send you the lead preview.';
-      } else if(plan === 'scale') {
-        titleElem.innerText = '🏆 Scale Elite Priority';
-        descElem.innerText = 'Unlimited territory + dedicated support. Fill the form to schedule a strategy call.';
-      } else {
-        titleElem.innerText = '🔓 Unlock This Lead';
-        descElem.innerText = 'Enter your business info to access full contact details & job notes.';
-      }
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
+    <div class="card p-6 rounded-2xl border border-cyan-500">
+      <div class="text-cyan-400 font-bold">Scale</div>
+      <div class="text-3xl font-black mt-3">$799<span class="text-sm text-gray-400">/mo</span></div>
+      <p class="text-gray-400 mt-2 text-sm">Priority demand routing</p>
+    </div>
 
-    function closeModal() {
-      const modal = document.getElementById('leadModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
+    <div class="card p-6 rounded-2xl">
+      <div class="text-cyan-400 font-bold">Enterprise</div>
+      <div class="text-3xl font-black mt-3">$1,999<span class="text-sm text-gray-400">/mo</span></div>
+      <p class="text-gray-400 mt-2 text-sm">Dedicated territory + API</p>
+    </div>
 
-    function openDashboardPreview() {
-      const dashboardModal = document.getElementById('dashboardModal');
-      const dashboardList = document.getElementById('dashboardLeadList');
-      dashboardList.innerHTML = leadsData.map(lead => `
-        <div class="bg-black/40 rounded-xl p-4 border-l-4 border-cyan-400">
-          <div class="flex justify-between"><span class="font-bold">${lead.title}</span><span class="text-xs ${lead.tagColor}">${lead.urgency}</span></div>
-          <div class="text-sm text-gray-300 mt-1">${lead.location}</div>
-          <div class="flex justify-between mt-2 text-xs text-gray-400"><span>💵 Value: ${lead.value}</span><span>📍 Exclusive territory</span></div>
-        </div>
-      `).join('');
-      dashboardModal.classList.remove('hidden');
-      dashboardModal.classList.add('flex');
-    }
+  </div>
+</section>
 
-    function closeDashboard() {
-      const modal = document.getElementById('dashboardModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
+<!-- SCRIPT -->
+<script>
+const data = [
+  {t:"Roof Replacement Opportunity", l:"Calgary, AB", v:"$21,000"},
+  {t:"Storm Damage Claim", l:"Edmonton, AB", v:"$14,500"},
+  {t:"Leak Inspection Request", l:"Red Deer, AB", v:"$3,200"}
+];
 
-    function submitLeadForm(e) {
-      e.preventDefault();
-      const name = document.getElementById('fullName').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const plan = document.getElementById('selectedPlan').value;
-      // simulate lead delivery
-      alert(`✅ Thanks ${name}! A NorthSky specialist will send your lead details to ${email} within 10 minutes. Plus a $50 credit for your first 3 leads.`);
-      closeModal();
-      // optional tracking
-      console.log({name, email, phone, plan});
-    }
+function render(){
+  document.getElementById("feed").innerHTML = data.map(d => `
+    <div class="bg-black/40 p-4 rounded-xl border border-white/5">
+      <div class="font-bold">${d.t}</div>
+      <div class="text-xs text-gray-400">${d.l}</div>
+      <div class="text-cyan-400 text-sm mt-2">${d.v}</div>
+    </div>
+  `).join("")
+}
+render();
+</script>
 
-    // simulate real-time new lead (add random new lead every 40 sec)
-    let leadCounter = 4;
-    function addSimulatedLiveLead() {
-      const newLeadOptions = [
-        { title: "Gutter & Downspout Replacement", location: "Nashville, TN • Urgent water damage", urgency: "High Intent", value: "$5,200", price: "$39", tagColor: "text-green-400", urgencyIcon: "💧" },
-        { title: "Skylight Leak Repair", location: "Portland, OR • Ceiling stains reported", urgency: "Same-day", value: "$2,850", price: "$29", tagColor: "text-orange-400", urgencyIcon: "☀️" }
-      ];
-      const randomLead = newLeadOptions[Math.floor(Math.random() * newLeadOptions.length)];
-      leadsData.unshift(randomLead);
-      if(leadsData.length > 6) leadsData.pop();
-      renderLeadFeed();
-      // subtle visual indicator
-      const feedContainer = document.getElementById('leadFeedContainer');
-      if(feedContainer) feedContainer.style.opacity = '0.95';
-      setTimeout(() => { if(feedContainer) feedContainer.style.opacity = '1'; }, 200);
-    }
-    // Initialize feed and set interval
-    renderLeadFeed();
-    setInterval(addSimulatedLiveLead, 45000);
-    
-    // expose functions globally
-    window.openLeadModal = openLeadModal;
-    window.closeModal = closeModal;
-    window.openDashboardPreview = openDashboardPreview;
-    window.closeDashboard = closeDashboard;
-    window.submitLeadForm = submitLeadForm;
-    window.unlockLeadAction = unlockLeadAction;
-  </script>
 </body>
 </html>
