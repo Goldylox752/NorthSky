@@ -1,6 +1,5 @@
 <script>
 (() => {
-
   "use strict";
 
   // =========================================
@@ -16,274 +15,160 @@
   // =========================================
   // HELPERS
   // =========================================
-  const $ = (selector, scope = document) =>
-    scope.querySelector(selector);
-
-  const $$ = (selector, scope = document) =>
-    [...scope.querySelectorAll(selector)];
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
   // =========================================
   // SCROLL REVEAL
   // =========================================
   const revealObserver = new IntersectionObserver(
-    (entries) => {
-
-      entries.forEach((entry) => {
-
+    (entries, obs) => {
+      entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-
         entry.target.classList.add("in");
-
-        revealObserver.unobserve(entry.target);
-
+        obs.unobserve(entry.target);
       });
-
     },
-    {
-      threshold: CONFIG.REVEAL_THRESHOLD
-    }
+    { threshold: CONFIG.REVEAL_THRESHOLD }
   );
 
-  $$("[data-reveal]").forEach((el, index) => {
-
-    el.style.transitionDelay =
-      `${(index % 5) * 70}ms`;
-
+  $$("[data-reveal]").forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 5) * 70}ms`;
     revealObserver.observe(el);
-
   });
 
   // =========================================
   // COUNTERS
   // =========================================
-  function animateCounter({
-    element,
-    target,
-    prefix = "",
-    suffix = "",
-    duration = CONFIG.COUNTER_DURATION
-  }) {
+  function animateCounter({ element, target, prefix = "", suffix = "", duration = CONFIG.COUNTER_DURATION }) {
+    const start = performance.now();
 
-    const startTime = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(eased * target);
 
-    function update(now) {
+      element.textContent = `${prefix}${value}${suffix}`;
 
-      const progress =
-        Math.min((now - startTime) / duration, 1);
-
-      const eased =
-        1 - Math.pow(1 - progress, 3);
-
-      const current =
-        Math.round(eased * target);
-
-      element.textContent =
-        `${prefix}${current}${suffix}`;
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      }
-
+      if (progress < 1) requestAnimationFrame(tick);
     }
 
-    requestAnimationFrame(update);
-
+    requestAnimationFrame(tick);
   }
 
   const counterObserver = new IntersectionObserver(
-    (entries) => {
-
-      entries.forEach((entry) => {
-
+    (entries, obs) => {
+      entries.forEach(entry => {
         if (!entry.isIntersecting) return;
 
         const el = entry.target;
+        const target = Number(el.dataset.count || 0);
 
-        const target =
-          parseFloat(el.dataset.count || 0);
-
-        const prefix =
-          el.dataset.prefix || "";
-
-        const suffix =
-          el.dataset.suffix || "";
-
-        const display =
-          el.dataset.display;
-
-        // Static display values
-        if (display) {
-
-          el.textContent = display;
-
-          counterObserver.unobserve(el);
-
+        if (el.dataset.display) {
+          el.textContent = el.dataset.display;
+          obs.unobserve(el);
           return;
-
         }
 
         animateCounter({
           element: el,
           target,
-          prefix,
-          suffix
+          prefix: el.dataset.prefix || "",
+          suffix: el.dataset.suffix || ""
         });
 
-        counterObserver.unobserve(el);
-
+        obs.unobserve(el);
       });
-
     },
-    {
-      threshold: 0.45
-    }
+    { threshold: 0.45 }
   );
 
-  $$("[data-count]").forEach((el) => {
-    counterObserver.observe(el);
-  });
+  $$("[data-count]").forEach(el => counterObserver.observe(el));
 
   // =========================================
-  // HERO METRICS
+  // HERO COUNTERS
   // =========================================
   const heroCounters = [
-    {
-      id: "counter-close",
-      target: 41,
-      suffix: "%"
-    },
-    {
-      id: "counter-leads",
-      target: 127,
-      suffix: ""
-    }
+    { id: "counter-close", target: 41, suffix: "%" },
+    { id: "counter-leads", target: 127, suffix: "" }
   ];
 
-  heroCounters.forEach((counter, index) => {
-
-    const el =
-      document.getElementById(counter.id);
-
+  heroCounters.forEach((c, i) => {
+    const el = document.getElementById(c.id);
     if (!el) return;
 
     setTimeout(() => {
-
       animateCounter({
         element: el,
-        target: counter.target,
-        suffix: counter.suffix,
+        target: c.target,
+        suffix: c.suffix,
         duration: 1800
       });
-
-    }, 700 + (index * 150));
-
+    }, 700 + i * 150);
   });
 
   // =========================================
   // FEATURE SWITCHER
   // =========================================
-  const featureItems =
-    $$(".feat");
-
-  const featurePanels =
-    $$(".preview-panel");
+  const featureItems = $$(".feat");
+  const featurePanels = $$(".preview-panel");
 
   function switchFeature(index) {
+    featureItems.forEach(i => i.classList.remove("active"));
+    featurePanels.forEach(p => p.classList.remove("active"));
 
-    featureItems.forEach((item) => {
-      item.classList.remove("active");
-    });
+    const activeItem = document.querySelector(`.feat[data-feat="${index}"]`);
+    const activePanel = document.getElementById(`feat-${index}`);
 
-    featurePanels.forEach((panel) => {
-      panel.classList.remove("active");
-    });
-
-    const activeItem =
-      $(`.feat[data-feat="${index}"]`);
-
-    const activePanel =
-      document.getElementById(`feat-${index}`);
-
-    activeItem?.classList.add("active");
-
-    activePanel?.classList.add("active");
-
+    if (activeItem) activeItem.classList.add("active");
+    if (activePanel) activePanel.classList.add("active");
   }
 
-  featureItems.forEach((item) => {
-
+  featureItems.forEach(item => {
     if (item.dataset.bound) return;
-
-    item.dataset.bound = "true";
+    item.dataset.bound = "1";
 
     item.addEventListener("click", () => {
-
       switchFeature(item.dataset.feat);
-
     });
-
   });
 
   // =========================================
-  // FAQ ACCORDION
+  // FAQ
   // =========================================
-  const faqItems =
-    $$(".faq-item");
+  const faqItems = $$(".faq-item");
 
   function toggleFaq(item) {
+    const isOpen = item.classList.contains("open");
 
-    const isOpen =
-      item.classList.contains("open");
+    faqItems.forEach(f => f.classList.remove("open"));
 
-    faqItems.forEach((faq) => {
-      faq.classList.remove("open");
-    });
-
-    if (!isOpen) {
-      item.classList.add("open");
-    }
-
+    if (!isOpen) item.classList.add("open");
   }
 
-  faqItems.forEach((item) => {
-
-    const btn =
-      $(".faq-btn", item);
-
+  faqItems.forEach(item => {
+    const btn = $(".faq-btn", item);
     if (!btn || btn.dataset.bound) return;
 
-    btn.dataset.bound = "true";
+    btn.dataset.bound = "1";
 
-    btn.addEventListener("click", (e) => {
-
+    btn.addEventListener("click", e => {
       e.preventDefault();
-
       toggleFaq(item);
-
     });
-
   });
 
-  // Open first FAQ by default
-  if (
-    faqItems.length &&
-    !$(".faq-item.open")
-  ) {
+  if (faqItems.length && !$(".faq-item.open")) {
     faqItems[0].classList.add("open");
   }
 
   // =========================================
   // SMOOTH SCROLL
   // =========================================
-  $$('a[href^="#"]').forEach((link) => {
-
-    link.addEventListener("click", (e) => {
-
-      const id =
-        link.getAttribute("href").slice(1);
-
-      const target =
-        document.getElementById(id);
+  $$('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", e => {
+      const id = link.getAttribute("href")?.slice(1);
+      const target = id ? document.getElementById(id) : null;
 
       if (!target) return;
 
@@ -293,87 +178,53 @@
         behavior: "smooth",
         block: "start"
       });
-
     });
-
   });
 
   // =========================================
-  // DEMO CTA BUTTONS
+  // DEMO CTA
   // =========================================
   function openDemo() {
-
-    window.open(
-      CONFIG.DEMO_URL,
-      "_blank",
-      "noopener,noreferrer"
-    );
-
+    window.open(CONFIG.DEMO_URL, "_blank", "noopener,noreferrer");
   }
 
-  const ctaButtons = $$(
-    ".btn-primary, .btn-white, .nav-cta"
-  );
-
-  ctaButtons.forEach((btn) => {
-
+  $$(".btn-primary, .btn-white, .nav-cta").forEach(btn => {
     if (btn.dataset.bound) return;
+    btn.dataset.bound = "1";
 
-    btn.dataset.bound = "true";
-
-    btn.addEventListener("click", (e) => {
-
+    btn.addEventListener("click", e => {
       e.preventDefault();
-
       openDemo();
-
     });
-
   });
 
   // =========================================
-  // NAVBAR SCROLL STATE
+  // NAVBAR
   // =========================================
-  const nav = $("nav");
+  const nav = document.querySelector("nav");
 
   function updateNav() {
-
     if (!nav) return;
 
-    if (window.scrollY > CONFIG.NAV_SCROLL_OFFSET) {
+    const scrolled = window.scrollY > CONFIG.NAV_SCROLL_OFFSET;
 
-      nav.style.boxShadow =
-        "0 10px 40px rgba(10,14,26,.06)";
+    nav.style.boxShadow = scrolled
+      ? "0 10px 40px rgba(10,14,26,.08)"
+      : "none";
 
-      nav.style.background =
-        "rgba(247,248,252,.96)";
-
-    } else {
-
-      nav.style.boxShadow = "none";
-
-      nav.style.background =
-        "rgba(247,248,252,.92)";
-
-    }
-
+    nav.style.background = scrolled
+      ? "rgba(247,248,252,.98)"
+      : "rgba(247,248,252,.92)";
   }
 
-  window.addEventListener(
-    "scroll",
-    updateNav,
-    { passive: true }
-  );
-
+  window.addEventListener("scroll", updateNav, { passive: true });
   updateNav();
 
   // =========================================
-  // PERFORMANCE
+  // LOAD STATE
   // =========================================
   window.addEventListener("load", () => {
-
     document.body.classList.add("loaded");
-
   });
 
 })();
