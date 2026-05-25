@@ -1,60 +1,44 @@
-// NorthSky UI + Interaction Engine
 (() => {
-
   "use strict";
 
-  // -----------------------------------
+  // =========================================
   // CONFIG
-  // -----------------------------------
+  // =========================================
   const CONFIG = {
     demoUrl: "https://exchange-8gxt.onrender.com",
     animationDuration: 1600,
     revealThreshold: 0.12
   };
 
-  // -----------------------------------
+  // =========================================
   // HELPERS
-  // -----------------------------------
-  const $ = (selector, scope = document) =>
-    scope.querySelector(selector);
+  // =========================================
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  const $$ = (selector, scope = document) =>
-    [...scope.querySelectorAll(selector)];
-
-  // -----------------------------------
-  // SCROLL REVEALS
-  // -----------------------------------
+  // =========================================
+  // SCROLL REVEAL
+  // =========================================
   const revealObserver = new IntersectionObserver(
-    (entries) => {
-
-      entries.forEach((entry) => {
-
+    (entries, obs) => {
+      entries.forEach(entry => {
         if (!entry.isIntersecting) return;
 
         entry.target.classList.add("in");
-
-        revealObserver.unobserve(entry.target);
-
+        obs.unobserve(entry.target);
       });
-
     },
-    {
-      threshold: CONFIG.revealThreshold
-    }
+    { threshold: CONFIG.revealThreshold }
   );
 
-  $$("[data-reveal]").forEach((el, idx) => {
-
-    el.style.transitionDelay =
-      `${(idx % 5) * 70}ms`;
-
+  $$("[data-reveal]").forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 5) * 70}ms`;
     revealObserver.observe(el);
-
   });
 
-  // -----------------------------------
-  // COUNT-UP STATISTICS
-  // -----------------------------------
+  // =========================================
+  // COUNTERS
+  // =========================================
   const animateValue = ({
     el,
     target = 0,
@@ -62,225 +46,131 @@
     suffix = "",
     duration = CONFIG.animationDuration
   }) => {
-
     const start = performance.now();
 
-    const update = (now) => {
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(eased * target);
 
-      const progress =
-        Math.min((now - start) / duration, 1);
+      el.textContent = `${prefix}${value}${suffix}`;
 
-      const eased =
-        1 - Math.pow(1 - progress, 3);
-
-      const current =
-        Math.round(eased * target);
-
-      el.textContent =
-        `${prefix}${current}${suffix}`;
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      }
-
+      if (progress < 1) requestAnimationFrame(tick);
     };
 
-    requestAnimationFrame(update);
-
+    requestAnimationFrame(tick);
   };
 
   const counterObserver = new IntersectionObserver(
-    (entries) => {
-
-      entries.forEach((entry) => {
-
+    (entries, obs) => {
+      entries.forEach(entry => {
         if (!entry.isIntersecting) return;
 
         const el = entry.target;
 
-        const target =
-          parseFloat(el.dataset.count || 0);
+        const target = Number(el.dataset.count || 0);
+        const prefix = el.dataset.prefix || "";
+        const suffix = el.dataset.suffix || "";
 
-        const prefix =
-          el.dataset.prefix || "";
-
-        const suffix =
-          el.dataset.suffix || "";
-
-        const display =
-          el.dataset.display;
-
-        // Static display value
-        if (display) {
-
-          el.textContent = display;
-
-          counterObserver.unobserve(el);
-
+        if (el.dataset.display) {
+          el.textContent = el.dataset.display;
+          obs.unobserve(el);
           return;
-
         }
 
-        animateValue({
-          el,
-          target,
-          prefix,
-          suffix
-        });
-
-        counterObserver.unobserve(el);
-
+        animateValue({ el, target, prefix, suffix });
+        obs.unobserve(el);
       });
-
     },
-    {
-      threshold: 0.45
-    }
+    { threshold: 0.45 }
   );
 
-  $$("[data-count]").forEach((el) => {
-    counterObserver.observe(el);
-  });
+  $$("[data-count]").forEach(el => counterObserver.observe(el));
 
-  // -----------------------------------
-  // HERO METRIC ANIMATION
-  // -----------------------------------
+  // =========================================
+  // HERO METRICS
+  // =========================================
   const heroMetrics = [
-    {
-      id: "counter-close",
-      target: 41,
-      suffix: "%"
-    },
-    {
-      id: "counter-leads",
-      target: 127,
-      suffix: ""
-    }
+    { id: "counter-close", target: 41, suffix: "%" },
+    { id: "counter-leads", target: 127, suffix: "" }
   ];
 
-  heroMetrics.forEach((metric, index) => {
-
-    const el = document.getElementById(metric.id);
-
+  heroMetrics.forEach((m, i) => {
+    const el = document.getElementById(m.id);
     if (!el) return;
 
     setTimeout(() => {
-
       animateValue({
         el,
-        target: metric.target,
-        suffix: metric.suffix,
+        target: m.target,
+        suffix: m.suffix,
         duration: 1800
       });
-
-    }, 700 + (index * 180));
-
+    }, 700 + i * 180);
   });
 
-  // -----------------------------------
-  // FEATURE PANEL SWITCHING
-  // -----------------------------------
+  // =========================================
+  // FEATURE SWITCHER
+  // =========================================
   const featureItems = $$(".feat");
+  const previewPanels = $$(".preview-panel");
 
-  const previewPanels =
-    $$(".preview-panel");
+  function switchFeature(index) {
+    featureItems.forEach(i => i.classList.remove("active"));
+    previewPanels.forEach(p => p.classList.remove("active"));
 
-  const switchFeature = (index) => {
-
-    featureItems.forEach((item) => {
-      item.classList.remove("active");
-    });
-
-    previewPanels.forEach((panel) => {
-      panel.classList.remove("active");
-    });
-
-    const activeItem =
-      $(`.feat[data-feat="${index}"]`);
-
-    const activePanel =
-      document.getElementById(`feat-${index}`);
+    const activeItem = document.querySelector(`.feat[data-feat="${index}"]`);
+    const activePanel = document.getElementById(`feat-${index}`);
 
     activeItem?.classList.add("active");
-
     activePanel?.classList.add("active");
+  }
 
-  };
-
-  featureItems.forEach((item) => {
-
+  featureItems.forEach(item => {
     if (item.dataset.bound) return;
-
-    item.dataset.bound = "true";
+    item.dataset.bound = "1";
 
     item.addEventListener("click", () => {
-
       switchFeature(item.dataset.feat);
-
     });
-
   });
 
-  // -----------------------------------
-  // FAQ ACCORDION
-  // -----------------------------------
-  const faqItems =
-    $$(".faq-item");
+  // =========================================
+  // FAQ
+  // =========================================
+  const faqItems = $$(".faq-item");
 
-  const toggleFaq = (item) => {
+  function toggleFaq(item) {
+    const isOpen = item.classList.contains("open");
 
-    const isOpen =
-      item.classList.contains("open");
+    faqItems.forEach(f => f.classList.remove("open"));
 
-    faqItems.forEach((faq) => {
-      faq.classList.remove("open");
-    });
+    if (!isOpen) item.classList.add("open");
+  }
 
-    if (!isOpen) {
-      item.classList.add("open");
-    }
-
-  };
-
-  faqItems.forEach((item) => {
-
-    const btn =
-      $(".faq-btn", item);
-
+  faqItems.forEach(item => {
+    const btn = $(".faq-btn", item);
     if (!btn || btn.dataset.bound) return;
 
-    btn.dataset.bound = "true";
+    btn.dataset.bound = "1";
 
-    btn.addEventListener("click", (e) => {
-
+    btn.addEventListener("click", e => {
       e.preventDefault();
-
       toggleFaq(item);
-
     });
-
   });
 
-  // Open first FAQ by default
-  if (
-    faqItems.length &&
-    !$(".faq-item.open")
-  ) {
+  if (faqItems.length && !$(".faq-item.open")) {
     faqItems[0].classList.add("open");
   }
 
-  // -----------------------------------
+  // =========================================
   // SMOOTH SCROLL
-  // -----------------------------------
-  $$('a[href^="#"]').forEach((link) => {
-
-    link.addEventListener("click", (e) => {
-
-      const id =
-        link.getAttribute("href").slice(1);
-
-      const target =
-        document.getElementById(id);
+  // =========================================
+  $$('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", e => {
+      const id = link.getAttribute("href")?.slice(1);
+      const target = id ? document.getElementById(id) : null;
 
       if (!target) return;
 
@@ -290,77 +180,42 @@
         behavior: "smooth",
         block: "start"
       });
-
     });
-
   });
 
-  // -----------------------------------
-  // DEMO / CTA BUTTONS
-  // -----------------------------------
-  const openDemo = () => {
+  // =========================================
+  // CTA BUTTONS
+  // =========================================
+  function openDemo() {
+    window.open(CONFIG.demoUrl, "_blank", "noopener,noreferrer");
+  }
 
-    window.open(
-      CONFIG.demoUrl,
-      "_blank",
-      "noopener,noreferrer"
-    );
-
-  };
-
-  const ctaButtons = $$(
-    ".btn-primary, .btn-white, .nav-cta"
-  );
-
-  ctaButtons.forEach((btn) => {
-
+  $$(".btn-primary, .btn-white, .nav-cta").forEach(btn => {
     if (btn.dataset.bound) return;
+    btn.dataset.bound = "1";
 
-    btn.dataset.bound = "true";
-
-    btn.addEventListener("click", (e) => {
-
+    btn.addEventListener("click", e => {
       e.preventDefault();
-
       openDemo();
-
     });
-
   });
 
-  // -----------------------------------
-  // NAVBAR SHADOW ON SCROLL
-  // -----------------------------------
-  const navbar =
-    $("header");
+  // =========================================
+  // NAVBAR
+  // =========================================
+  const navbar = document.querySelector("header");
 
-  const updateNavbar = () => {
-
+  function updateNavbar() {
     if (!navbar) return;
 
-    if (window.scrollY > 20) {
+    const scrolled = window.scrollY > 20;
 
-      navbar.classList.add(
-        "border-white\\/10",
-        "bg-black\\/80",
-        "backdrop-blur-xl"
-      );
+    navbar.classList.toggle("bg-black/80", scrolled);
+    navbar.classList.toggle("backdrop-blur-xl", scrolled);
+    navbar.classList.toggle("border-white/10", scrolled);
+  }
 
-    } else {
-
-      navbar.classList.remove(
-        "bg-black\\/80"
-      );
-
-    }
-
-  };
-
-  window.addEventListener(
-    "scroll",
-    updateNavbar
-  );
-
+  window.addEventListener("scroll", updateNavbar, { passive: true });
   updateNavbar();
 
 })();
