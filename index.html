@@ -1,231 +1,120 @@
-<script>
-(() => {
-  "use strict";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SancheSolutions · AI Revenue SaaS</title>
 
-  // =========================================
-  // CONFIG
-  // =========================================
-  const CONFIG = {
-    DEMO_URL: "https://exchange-8gxt.onrender.com",
-    REVEAL_THRESHOLD: 0.12,
-    COUNTER_DURATION: 1600,
-    NAV_SCROLL_OFFSET: 40
-  };
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  // =========================================
-  // HELPERS
-  // =========================================
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+<style>
+body {
+  margin: 0;
+  font-family: DM Sans, sans-serif;
+  background: radial-gradient(circle at 20% 20%, #0b1a3a, #050816);
+  color: white;
+}
 
-  // =========================================
-  // SCROLL REVEAL
-  // =========================================
-  const revealObserver = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("in");
-        obs.unobserve(entry.target);
-      });
-    },
-    { threshold: CONFIG.REVEAL_THRESHOLD }
-  );
+nav {
+  display:flex;
+  justify-content:space-between;
+  padding:18px 24px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
 
-  $$("[data-reveal]").forEach((el, i) => {
-    el.style.transitionDelay = `${(i % 5) * 70}ms`;
-    revealObserver.observe(el);
-  });
+.logo {
+  font-weight:800;
+}
 
-  // =========================================
-  // COUNTERS
-  // =========================================
-  function animateCounter({ element, target, prefix = "", suffix = "", duration = CONFIG.COUNTER_DURATION }) {
-    const start = performance.now();
+.logo span { color:#4f8cff; }
 
-    function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const value = Math.round(eased * target);
+.btn {
+  background:#4f8cff;
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+  color:white;
+  cursor:pointer;
+}
 
-      element.textContent = `${prefix}${value}${suffix}`;
+.hero {
+  text-align:center;
+  padding:100px 20px;
+}
 
-      if (progress < 1) requestAnimationFrame(tick);
-    }
+.hero h1 {
+  font-size:52px;
+  margin:0;
+}
 
-    requestAnimationFrame(tick);
-  }
+.hero h1 span { color:#4f8cff; }
 
-  const counterObserver = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
+.hero p {
+  opacity:0.8;
+  max-width:700px;
+  margin:20px auto;
+  line-height:1.6;
+}
 
-        const el = entry.target;
-        const target = Number(el.dataset.count || 0);
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+  padding:40px;
+  max-width:1100px;
+  margin:auto;
+}
 
-        if (el.dataset.display) {
-          el.textContent = el.dataset.display;
-          obs.unobserve(el);
-          return;
-        }
+.card {
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:18px;
+  border-radius:14px;
+}
 
-        animateCounter({
-          element: el,
-          target,
-          prefix: el.dataset.prefix || "",
-          suffix: el.dataset.suffix || ""
-        });
+a {
+  text-decoration:none;
+}
+</style>
+</head>
 
-        obs.unobserve(el);
-      });
-    },
-    { threshold: 0.45 }
-  );
+<body>
 
-  $$("[data-count]").forEach(el => counterObserver.observe(el));
+<nav>
+  <div class="logo">Sanche<span>Solutions</span></div>
+  <a href="/app.html"><button class="btn">Launch App</button></a>
+</nav>
 
-  // =========================================
-  // HERO COUNTERS
-  // =========================================
-  const heroCounters = [
-    { id: "counter-close", target: 41, suffix: "%" },
-    { id: "counter-leads", target: 127, suffix: "" }
-  ];
+<section class="hero">
+  <h1>AI Revenue <span>SaaS Platform</span></h1>
+  <p>
+    We build YC-style AI systems that automate sales, leads, CRM, and revenue operations.
+    Think Intercom + HubSpot + AI agents.
+  </p>
 
-  heroCounters.forEach((c, i) => {
-    const el = document.getElementById(c.id);
-    if (!el) return;
+  <a href="/app.html">
+    <button class="btn">Start Using AI</button>
+  </a>
+</section>
 
-    setTimeout(() => {
-      animateCounter({
-        element: el,
-        target: c.target,
-        suffix: c.suffix,
-        duration: 1800
-      });
-    }, 700 + i * 150);
-  });
+<section class="grid">
 
-  // =========================================
-  // FEATURE SWITCHER
-  // =========================================
-  const featureItems = $$(".feat");
-  const featurePanels = $$(".preview-panel");
+  <div class="card">
+    <h3>AI Sales Engine</h3>
+    <p>Automatically qualifies leads and books calls.</p>
+  </div>
 
-  function switchFeature(index) {
-    featureItems.forEach(i => i.classList.remove("active"));
-    featurePanels.forEach(p => p.classList.remove("active"));
+  <div class="card">
+    <h3>CRM Automation</h3>
+    <p>Syncs workflows across your entire pipeline.</p>
+  </div>
 
-    const activeItem = document.querySelector(`.feat[data-feat="${index}"]`);
-    const activePanel = document.getElementById(`feat-${index}`);
+  <div class="card">
+    <h3>AI Chat Funnel</h3>
+    <p>Turns visitors into customers instantly.</p>
+  </div>
 
-    if (activeItem) activeItem.classList.add("active");
-    if (activePanel) activePanel.classList.add("active");
-  }
+</section>
 
-  featureItems.forEach(item => {
-    if (item.dataset.bound) return;
-    item.dataset.bound = "1";
-
-    item.addEventListener("click", () => {
-      switchFeature(item.dataset.feat);
-    });
-  });
-
-  // =========================================
-  // FAQ
-  // =========================================
-  const faqItems = $$(".faq-item");
-
-  function toggleFaq(item) {
-    const isOpen = item.classList.contains("open");
-
-    faqItems.forEach(f => f.classList.remove("open"));
-
-    if (!isOpen) item.classList.add("open");
-  }
-
-  faqItems.forEach(item => {
-    const btn = $(".faq-btn", item);
-    if (!btn || btn.dataset.bound) return;
-
-    btn.dataset.bound = "1";
-
-    btn.addEventListener("click", e => {
-      e.preventDefault();
-      toggleFaq(item);
-    });
-  });
-
-  if (faqItems.length && !$(".faq-item.open")) {
-    faqItems[0].classList.add("open");
-  }
-
-  // =========================================
-  // SMOOTH SCROLL
-  // =========================================
-  $$('a[href^="#"]').forEach(link => {
-    link.addEventListener("click", e => {
-      const id = link.getAttribute("href")?.slice(1);
-      const target = id ? document.getElementById(id) : null;
-
-      if (!target) return;
-
-      e.preventDefault();
-
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    });
-  });
-
-  // =========================================
-  // DEMO CTA
-  // =========================================
-  function openDemo() {
-    window.open(CONFIG.DEMO_URL, "_blank", "noopener,noreferrer");
-  }
-
-  $$(".btn-primary, .btn-white, .nav-cta").forEach(btn => {
-    if (btn.dataset.bound) return;
-    btn.dataset.bound = "1";
-
-    btn.addEventListener("click", e => {
-      e.preventDefault();
-      openDemo();
-    });
-  });
-
-  // =========================================
-  // NAVBAR
-  // =========================================
-  const nav = document.querySelector("nav");
-
-  function updateNav() {
-    if (!nav) return;
-
-    const scrolled = window.scrollY > CONFIG.NAV_SCROLL_OFFSET;
-
-    nav.style.boxShadow = scrolled
-      ? "0 10px 40px rgba(10,14,26,.08)"
-      : "none";
-
-    nav.style.background = scrolled
-      ? "rgba(247,248,252,.98)"
-      : "rgba(247,248,252,.92)";
-  }
-
-  window.addEventListener("scroll", updateNav, { passive: true });
-  updateNav();
-
-  // =========================================
-  // LOAD STATE
-  // =========================================
-  window.addEventListener("load", () => {
-    document.body.classList.add("loaded");
-  });
-
-})();
-</script>
+</body>
+</html>
