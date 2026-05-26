@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SancheSolutions · AI App</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:DM Sans, sans-serif;
+  background:#050816;
+  color:white;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+header {
+  padding:16px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  display:flex;
+  justify-content:space-between;
+}
+
+.logo span { color:#4f8cff; }
+
+a { color:white; text-decoration:none; }
+
+.chat {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  max-width:900px;
+  margin:auto;
+  width:100%;
+  padding:20px;
+}
+
+.messages {
+  flex:1;
+  overflow:auto;
+}
+
+.msg {
+  margin:8px 0;
+  padding:10px 14px;
+  border-radius:12px;
+  max-width:75%;
+}
+
+.user { background:#4f8cff; margin-left:auto; }
+.bot { background:rgba(255,255,255,0.05); }
+
+.input {
+  display:flex;
+  gap:10px;
+  padding-top:10px;
+}
+
+input {
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:transparent;
+  color:white;
+}
+
+button {
+  width:90px;
+  background:#4f8cff;
+  border:none;
+  color:white;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Sanche<span>App</span></div>
+  <a href="/">Home</a>
+</header>
+
+<div class="chat">
+  <div id="messages" class="messages"></div>
+
+  <div class="input">
+    <input id="input" placeholder="Ask about automation, SaaS, pricing..." />
+    <button onclick="send()">Send</button>
+  </div>
+</div>
+
+<script>
+const messages = document.getElementById("messages");
+const input = document.getElementById("input");
+
+function add(text, type) {
+  const div = document.createElement("div");
+  div.className = "msg " + type;
+  div.textContent = text;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function ai(msg) {
+  msg = msg.toLowerCase();
+
+  if (msg.includes("price")) return "Plans start at $2,500/month for AI automation systems.";
+  if (msg.includes("demo")) return "We can book a demo — what does your business do?";
+  if (msg.includes("saas")) return "YC-style AI SaaS: leads, CRM, automation, revenue.";
+  if (msg.includes("lead")) return "We automate lead capture, scoring, and conversion.";
+
+  return "Tell me about your business and I’ll design an AI system for you.";
+}
+
+function send() {
+  const text = input.value;
+  if (!text.trim()) return;
+
+  add(text, "user");
+  input.value = "";
+
+  setTimeout(() => {
+    add(ai(text), "bot");
+  }, 400);
+}
+
+window.onload = () => {
+  add("👋 Welcome to SancheSolutions AI App", "bot");
+};
+</script>
+
+</body>
+</html>
